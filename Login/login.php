@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <title>Document</title>
 </head>
@@ -34,7 +34,7 @@
                     <label><input type="checkbox">Remember me</label>
                     <a href="#">Forgot Password?</a>
                 </div>
-                <button type="submit" onclick="window.location.href='cliente.php'"class="btn">Login</button>
+                <button type="submit" onclick="window.location.href='cliente.html'"class="btn">Login</button>
                 
 
                 <div class="login-register">
@@ -64,7 +64,7 @@
                 <div class="remember-forgot">
                     <label><input type="checkbox">I agree to the terms & conditions</label>
                 </div>
-                <button type="submit" onclick="window.location.href='cliente.php'" class="btn">Register</button>
+                <button type="submit" onclick="window.location.href='cliente.html'" class="btn">Register</button>
 
                 <div class="login-register">
                     <p>Already have an account? <a href="#" class="login-link">Login</a></p>
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <script src="index.js"></script>
+    <script src="login.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
