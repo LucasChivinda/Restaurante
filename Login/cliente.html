@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cliente - Restaurante</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #fff8f0; }
+    header {  background: linear-gradient(135deg, #43cea2, #185a9d); color: white; text-align: left; padding: 20px; }
+    .container { display: flex; gap: 30px; padding: 30px; }
+    .menu { flex: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .item { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+    .item h3 { color: #b22222; }
+    button { background: linear-gradient(90deg, #43cea2, #185a9d); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+    button:hover { background: linear-gradient(90deg, #185a9d, #43cea2); }
+    .cart { flex: 1; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+    .cart h2 { color: #b22222; text-align: center; }
+    .cart ul { list-style: none; padding: 0; }
+    .cart ul li { margin: 10px 0; display: flex; justify-content: space-between; border-bottom: 1px solid #eee; }
+    .total { font-weight: bold; margin-top: 20px; text-align: center; font-size: 1.2em; }
+    .buy-btn { display: block; margin: 20px auto; padding: 12px 25px; font-size: 1.1em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍽️ Restaurante Sabor & Arte LAA</h1>
+    <p style="text-align: center;">Cardápio do Dia...</p>
+  </header>
+
+  <div class="container">
+    <!-- Cardápio -->
+    <section class="menu">
+      <div class="item">
+        <h3>Pizza Margherita</h3>
+        <p>Massa fina, molho de tomate, queijo e manjericão.</p>
+        <span>R$ 35,00</span>
+        <button onclick="addToCart('Pizza Margherita', 35)">Adicionar</button>
+      </div>
+
+      <div class="item">
+        <h3>Hambúrguer Artesanal</h3>
+        <p>Pão brioche, carne 180g, cheddar e molho especial.</p>
+        <span>R$ 28,00</span>
+        <button onclick="addToCart('Hambúrguer Artesanal', 28)">Adicionar</button>
+      </div>
+
+      <div class="item">
+        <h3>Salada Tropical</h3>
+        <p>Mix de folhas, frutas frescas e molho cítrico.</p>
+        <span>R$ 22,00</span>
+        <button onclick="addToCart('Salada Tropical', 22)">Adicionar</button>
+      </div>
+
+      <div class="item">
+        <h3>Cachorro quente</h3>
+        <p>Mix de folhas, frutas frescas e molho cítrico.</p>
+        <span>R$ 22,00</span>
+        <button onclick="addToCart('Salada Tropical', 22)">Adicionar</button>
+      </div>
+    </section>
+
+    <!-- Carrinho -->
+    <aside class="cart">
+      <h2>🛒 Carrinho</h2>
+      <ul id="cart-items"></ul>
+      <div class="total">Total: R$ <span id="cart-total">0</span>,00</div>
+      <a href="pagamento.html"><button class="buy-btn" onclick="finalizarCompra()">Comprar</button></a>
+    </aside>
+  </div>
+
+  <script>
+    let cart = [];
+    let total = 0;
+  
+    function addToCart(item, price) {
+      cart.push({item, price});
+      total += price;
+      updateCart();
+    }
+  
+    function updateCart() {
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+      cart.forEach((product, index) => {
+        cartList.innerHTML += `<li>${product.item} - R$ ${product.price},00 
+          <button onclick="removeFromCart(${index})">❌</button></li>`;
+      });
+      document.getElementById('cart-total').innerText = total;
+    }
+  
+    function removeFromCart(index) {
+      total -= cart[index].price;
+      cart.splice(index, 1);
+      updateCart();
+    }
+  
+    function finalizarCompra() {
+      // Recupera pedidos anteriores
+      let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+      pedidos.push(cart); // adiciona novo pedido
+      localStorage.setItem("pedidos", JSON.stringify(pedidos));
+      window.location.href = "funcionario.html";
+    }
+  </script>
+  
+<!--
+  <script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(item, price) {
+      cart.push({item, price});
+      total += price;
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+      cart.forEach((product, index) => {
+        cartList.innerHTML += `<li>${product.item} - R$ ${product.price},00 
+          <button onclick="removeFromCart(${index})">❌</button></li>`;
+      });
+      document.getElementById('cart-total').innerText = total;
+    }
+
+    function removeFromCart(index) {
+      total -= cart[index].price;
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function finalizarCompra() {
+      // Salva pedido no localStorage e redireciona
+      localStorage.setItem("pedido", JSON.stringify(cart));
+      window.location.href = "funcionario.html";
+    }
+  </script>
+  -->
+</body>
+</html>
